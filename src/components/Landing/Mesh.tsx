@@ -20,10 +20,9 @@ export default function Mesh() {
 
     useGSAP(() => {
         gsap.to(uniforms.uBend, {
-            value: 1,
-            duration: 1.4,
-            delay: 2,
-            ease: "power2.out",
+            value: 0.6,
+            duration: 1.8,
+            ease: "expo.out",
         });
     }, {
         scope: meshRef,
