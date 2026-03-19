@@ -6,7 +6,9 @@ import { Suspense } from "react";
 
 export default function Scene() {
     return (
-        <Canvas>
+        <Canvas
+            camera={{ position: [0, 0, 5] }}
+        >
             <Suspense fallback={null}>
                 <Mesh />
             </Suspense>
