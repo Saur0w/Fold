@@ -1,17 +1,21 @@
 "use client";
 
-import { Canvas } from "@react-three/fiber";
-import Mesh from "./Mesh";
-import { Suspense } from "react";
+import { useTexture } from "@react-three/drei";
+import { vertexShader, fragmentShader } from "@/lib/Shader";
 
-export default function Scene() {
+export default function Mesh() {
+    const texture = useTexture("/textures/g.jpg");
+
     return (
-        <Canvas
-            camera={{ position: [0, 0, 5] }}
-        >
-            <Suspense fallback={null}>
-                <Mesh />
-            </Suspense>
-        </Canvas>
+        <mesh>
+            <planeGeometry args={[3, 3.5]} />
+            <shaderMaterial
+                vertexShader={vertexShader}
+                fragmentShader={fragmentShader}
+                uniforms={{
+                    uTexture: { value: texture },
+                }}
+            />
+        </mesh>
     );
 }
