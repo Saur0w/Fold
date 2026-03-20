@@ -5,20 +5,26 @@ export const vertexShader = `
     void main() {
         vUv = uv;
         vec3 pos = position;
-        
-        float bend = uBend * (pos.y + 1.75);
-        pos.z += bend * bend * 0.3;
+        float PI = 3.14;
+       
+       
         
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
 `;
 
 export const fragmentShader = `
-  uniform sampler2D uTexture;
-  varying vec2 vUv;
+    uniform sampler2D uTexture;
+    varying vec2 vUv;
 
-  void main() {
-    vec4 texColor = texture2D(uTexture, vUv);
-    gl_FragColor = texColor;
-  }
+    void main() {
+        vec2 uv = vUv;
+
+        if (!gl_FrontFacing) {
+            uv.y = 1.0 - vUv.y;   
+        }
+
+        vec4 texColor = texture2D(uTexture, uv);
+        gl_FragColor = texColor;
+    }
 `;

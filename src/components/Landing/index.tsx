@@ -13,11 +13,11 @@ interface ImageProps {
 }
 
 const images: ImageProps[] = [
-    { src: "/images/m.jpg",    alt: "m" },
+    { src: "/images/look.jpg",    alt: "m" },
     { src: "/images/h.jpg",    alt: "h" },
     { src: "/images/t.jpg",    alt: "t" },
     { src: "/images/b.jpg",    alt: "b" },
-    { src: "/images/look.jpg", alt: "look at the sky" },
+    { src: "/images/f.jpg", alt: "look at the sky" },
     { src: "/images/musician.jpg", alt: "Musician" },
     { src: "/images/rosa.jpg", alt: "rosa" },
     { src: "/images/nurture.jpg", alt: "Nurture" },
@@ -44,11 +44,6 @@ export default function Landing() {
 
         tl.set(sceneRef.current, {
             opacity: 1,
-        });
-        tl.to(sceneRef.current, {
-            scale: 1.2,
-            duration: 1.5,
-            ease: "expo.out",
         });
     }, []);
 
