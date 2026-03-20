@@ -10,7 +10,7 @@ import { useGSAP } from "@gsap/react";
 
 export default function Mesh() {
     const { viewport } = useThree();
-    const texture = useTexture("/textures/g.jpg");
+    const texture = useTexture("/textures/f.jpg");
     const matRef = useRef<THREE.ShaderMaterial>(null);
     const meshRef = useRef<THREE.Mesh>(null);
     const w = viewport.width  * (200 / window.innerWidth);
@@ -22,16 +22,17 @@ export default function Mesh() {
     }), [texture]);
 
 
-    // useGSAP(() => {
-    //     gsap.to(uniforms.uBend, {
-    //         value: 0.6,
-    //         opacity: 0,
-    //         duration: 1.8,
-    //         ease: "expo.out",
-    //     });
-    // }, {
-    //     scope: meshRef,
-    // });
+    useGSAP(() => {
+        gsap.to(uniforms.uBend, {
+            delay: 2,
+            value: 0.6,
+            opacity: 0,
+            duration: 1.8,
+            ease: "expo.out",
+        });
+    }, {
+        scope: meshRef,
+    });
 
     return (
         <mesh ref={meshRef}>

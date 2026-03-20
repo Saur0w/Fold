@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 
   .scene {
     position: absolute;
@@ -12,7 +13,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 0; // Sits AT THE BOTTOM
+    z-index: 0;
   }
 
   .imageContainer {
@@ -20,9 +21,5 @@
     width: 200px;
     height: 220px;
     z-index: 10;
-
-    img {
-      object-fit: cover;
-    }
   }
 }

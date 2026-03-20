@@ -20,6 +20,10 @@ const images: ImageProps[] = [
     { src: "/images/look.jpg", alt: "look at the sky" },
     { src: "/images/musician.jpg", alt: "Musician" },
     { src: "/images/rosa.jpg", alt: "rosa" },
+    { src: "/images/nurture.jpg", alt: "Nurture" },
+    { src: "/images/adf.jpg",    alt: "adf" },
+    { src: "/images/green.jpg",    alt: "green" },
+    { src: "/images/narin.jpg",    alt: "Narin" },
 ];
 
 export default function Landing() {
@@ -35,11 +39,16 @@ export default function Landing() {
         imgs.forEach((img, i) => {
             tl.set(img, {
                 opacity: 0,
-            }, i * .2);
+            }, i * .15);
         });
 
         tl.set(sceneRef.current, {
             opacity: 1,
+        });
+        tl.to(sceneRef.current, {
+            scale: 1.2,
+            duration: 1.5,
+            ease: "expo.out",
         });
     }, []);
 
@@ -59,7 +68,6 @@ export default function Landing() {
                         sizes="100vw"
                         style={{
                             objectFit: "cover",
-                            // This ensures the first image in the array is on top
                             zIndex: images.length - index
                         }}
                     />
