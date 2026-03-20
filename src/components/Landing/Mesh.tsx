@@ -50,16 +50,18 @@ export default function Mesh() {
     });
 
     return (
-        <mesh ref={meshRef} scale={[1, 1, 1]}>
+        <>
             <OrbitControls />
-            <planeGeometry args={[w, h, 120, 120]} />
-            <shaderMaterial
-                ref={matRef}
-                vertexShader={vertexShader}
-                fragmentShader={fragmentShader}
-                uniforms={uniforms}
-                side={THREE.DoubleSide}
-            />
-        </mesh>
+            <mesh ref={meshRef} scale={[1, 1, 1]}>
+                <planeGeometry args={[w, h, 120, 120]} />
+                <shaderMaterial
+                    ref={matRef}
+                    vertexShader={vertexShader}
+                    fragmentShader={fragmentShader}
+                    uniforms={uniforms}
+                    side={THREE.DoubleSide}
+                />
+            </mesh>
+        </>
     );
 }
