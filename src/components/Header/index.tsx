@@ -25,7 +25,7 @@ export default function Header() {
             yPercent: 110,
             opacity: 0,
             duration: 0.6,
-            stagger: 0.08,
+            stagger: 0.01,
             ease: "power3.out",
             delay: 3.5,
         });
