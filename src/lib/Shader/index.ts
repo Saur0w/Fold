@@ -1,31 +1,26 @@
 export const vertexShader = `
     varying vec2 vUv;
-    uniform float uBend;
+uniform float uProgress; // 0 → 1
 
-    void main() {
-        vUv = uv;
-        vec3 pos = position;
+const float PI = 3.14159265;
 
-        // normalize Y (bottom = 0, top = 1)
-        float t = uv.y;
+void main() {
+    vUv = uv;
+    vec3 pos = position;
 
-        // only fold top half
-        float fold = smoothstep(0.5, 1.0, t);
+    float t = uv.y; // 0 = bottom, 1 = top
 
-        // angle goes up to PI (180°)
-        float angle = fold * uBend * 3.1415;
+    // Top (t=1) leads: completes flip at uProgress=0.5
+    // Bottom (t=0) lags: starts at uProgress=0.5, done at 1.0
+    float localP = clamp(uProgress * 2.0 - (1.0 - t), 0.0, 1.0);
+    float angle = localP * PI; // 0 → PI (half rotation per vertex)
 
-        // distance from fold line (center)
-        float y = pos.y;
-        
-        float s = sin(angle);
-        float c = cos(angle);
+    float origY = pos.y;
+    pos.y = origY * cos(angle);   // folds down toward bottom
+    pos.z = origY * sin(angle);   // bulges in +Z (toward viewer)
 
-        pos.y -= y * c;
-        pos.z -= y * s; 
-
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
-    }
+    gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
+}
 `;
 export const fragmentShader = `
     uniform sampler2D uTexture;

@@ -2,7 +2,7 @@
 
 import * as THREE from "three";
 import { useThree } from "@react-three/fiber";
-import {OrbitControls, useTexture} from "@react-three/drei";
+import { useTexture} from "@react-three/drei";
 import { vertexShader, fragmentShader } from "@/lib/Shader";
 import { useRef, useMemo } from "react";
 import gsap from "gsap";
@@ -18,32 +18,26 @@ export default function Mesh() {
 
     const uniforms = useMemo(() => ({
         uTexture: { value: texture },
-        uBend: { value: 0 },
+        uProgress: { value: 0 },
     }), [texture]);
 
 
     useGSAP(() => {
-        gsap.to(uniforms.uBend, {
-            delay: 2,
-            value: 0.6,
-            opacity: 0,
-            duration: 1.8,
-            ease: "expo.out",
+        gsap.to(uniforms.uProgress, {
+            delay: 1,
+            value: 1,
+            duration: 2.5,
+            ease: "expo.in"
         });
 
         if (!meshRef.current) return;
 
         gsap.to(meshRef.current.scale, {
             delay: 2,
-            x: 2,
-            y: 2,
-            duration: 2.5,
-            ease: "expo.out",
-        });
-        gsap.to(meshRef.current.rotation, {
-            x: Math.PI,        // starts flat, flips forward toward you
-            duration: 2,
-            ease: "expo.out",
+            x: 2.5,
+            y: 2.5,
+            duration: 1.3,
+            ease: "expo.in"
         });
     }, {
         scope: meshRef,
@@ -51,7 +45,6 @@ export default function Mesh() {
 
     return (
         <>
-            <OrbitControls />
             <mesh ref={meshRef} scale={[1, 1, 1]}>
                 <planeGeometry args={[w, h, 120, 120]} />
                 <shaderMaterial
