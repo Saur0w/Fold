@@ -30,6 +30,7 @@ export default function Landing() {
     const containerRef = useRef<HTMLDivElement>(null);
     const sceneRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
+    const paraRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const imgs = containerRef.current?.querySelectorAll("img");
@@ -37,10 +38,17 @@ export default function Landing() {
 
         const tl2 = gsap.timeline();
         tl2.to(lineRef.current, {
-            width: "100vw",
+            width: "75vw",
             duration: 2.5,
             ease: "expo.inOut"
         });
+
+        gsap.from(paraRef.current, {
+            delay: 2.5,
+            x: 300,
+            duration: 1.5,
+            ease: "expo.inOut"
+        })
 
         tl2.to(lineRef.current, {
             width: 0,
@@ -82,6 +90,9 @@ export default function Landing() {
                 ))}
             </div>
             <div className={styles.line} ref={lineRef} />
+            <div className={styles.heading} ref={paraRef}>
+                <h1>AS.01<br />/04</h1>
+            </div>
         </section>
     );
 }

@@ -33,4 +33,16 @@
     background: black;
     z-index: 101;
   }
+
+  .heading {
+    z-index: 101;
+    margin-left: 800px;
+    text-align: right;
+    h1 {
+      font-family: "Roboto", sans-serif;
+      font-size: 8rem;
+      font-weight: 600;
+      color: #000;
+    }
+  }
 }
