@@ -31,6 +31,7 @@ export default function Landing() {
     const sceneRef = useRef<HTMLDivElement>(null);
     const lineRef = useRef<HTMLDivElement>(null);
     const paraRef = useRef<HTMLDivElement>(null);
+    const footerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const imgs = containerRef.current?.querySelectorAll("img");
@@ -44,7 +45,7 @@ export default function Landing() {
         });
 
         gsap.from(paraRef.current, {
-            delay: 2.5,
+            delay: 2.2,
             x: 300,
             duration: 1.5,
             ease: "expo.inOut"
@@ -52,7 +53,7 @@ export default function Landing() {
 
         tl2.to(lineRef.current, {
             width: 0,
-            duration: 1.5,
+            duration: 1.2,
             ease: "expo.inOut"
         });
         const tl = gsap.timeline({ delay: 1 });
@@ -66,6 +67,12 @@ export default function Landing() {
         tl.set(sceneRef.current, {
             opacity: 1,
         });
+
+        tl.set(footerRef.current, {
+            opacity: 1,
+            delay: 1
+            }
+        )
     }, []);
 
     return (
@@ -92,6 +99,10 @@ export default function Landing() {
             <div className={styles.line} ref={lineRef} />
             <div className={styles.heading} ref={paraRef}>
                 <h1>AS.01<br />/04</h1>
+            </div>
+            <div className={styles.footer} ref={footerRef}>
+                <h4>&copy; DESIGN <br />SAUROW</h4>
+                <h4>C-NR. 07186749<br />DEV. SAUROW</h4>
             </div>
         </section>
     );
