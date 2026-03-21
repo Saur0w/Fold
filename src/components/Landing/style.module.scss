@@ -36,13 +36,18 @@
 
   .heading {
     z-index: 101;
-    margin-left: 800px;
+    margin-left: 700px;
     text-align: right;
     h1 {
       font-family: "Roboto", sans-serif;
       font-size: 8rem;
       font-weight: 600;
       color: #000;
+      .dot {
+        font-size: 0.5em;
+        vertical-align: middle;
+        line-height: 0;
+      }
     }
   }
 

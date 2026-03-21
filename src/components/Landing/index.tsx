@@ -98,7 +98,7 @@ export default function Landing() {
             </div>
             <div className={styles.line} ref={lineRef} />
             <div className={styles.heading} ref={paraRef}>
-                <h1>AS.01<br />/04</h1>
+                <h1>AS<span className={styles.dot}>●</span>01<br />/04</h1>
             </div>
             <div className={styles.footer} ref={footerRef}>
                 <h4>&copy; DESIGN <br />SAUROW</h4>
