@@ -3,23 +3,23 @@ export const vertexShader = `
     uniform float uBend;
     uniform float uPivot;
 
-    const float PI = 3.14159265;
-
     void main() {
         vUv = uv;
         vec3 pos = position;
         
+        // 1. Distance from the pivot point
         float dist = pos.y - uPivot;
         
-        float weight = smoothstep(-0.3, 0.3, dist);
+        // 2. Rigid Rotation
+        // By rotating all vertices uniformly around the pivot, 
+        // we guarantee NO stretching at any point.
+        pos.y = uPivot + dist * cos(uBend);
+        pos.z = dist * sin(uBend);
         
-        float angle = weight * uBend;
-        
-        pos.y = uPivot + dist * cos(angle);
-        pos.z = dist * sin(angle);
         gl_Position = projectionMatrix * modelViewMatrix * vec4(pos, 1.0);
     }
 `;
+
 export const fragmentShader = `
     uniform sampler2D uTexture;
     varying vec2 vUv;
@@ -27,8 +27,10 @@ export const fragmentShader = `
     void main() {
         vec2 uv = vUv;
 
+        // When the plane flips 180 degrees, the back face becomes visible.
         if (!gl_FrontFacing) {
-            uv.y = 1.0 - vUv.y;   
+            uv.y = 1.0 - vUv.y; // Fixes upside-down
+            uv.x = 1.0 - vUv.x; // Fixes horizontal mirroring (reading left-to-right)
         }
 
         vec4 texColor = texture2D(uTexture, uv);
