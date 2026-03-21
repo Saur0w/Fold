@@ -29,11 +29,24 @@ const images: ImageProps[] = [
 export default function Landing() {
     const containerRef = useRef<HTMLDivElement>(null);
     const sceneRef = useRef<HTMLDivElement>(null);
+    const lineRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         const imgs = containerRef.current?.querySelectorAll("img");
         if (!imgs) return;
 
+        const tl2 = gsap.timeline();
+        tl2.to(lineRef.current, {
+            width: "100vw",
+            duration: 2.5,
+            ease: "expo.inOut"
+        });
+
+        tl2.to(lineRef.current, {
+            width: 0,
+            duration: 1.5,
+            ease: "expo.inOut"
+        });
         const tl = gsap.timeline({ delay: 1 });
 
         imgs.forEach((img, i) => {
@@ -68,6 +81,7 @@ export default function Landing() {
                     />
                 ))}
             </div>
+            <div className={styles.line} ref={lineRef} />
         </section>
     );
 }

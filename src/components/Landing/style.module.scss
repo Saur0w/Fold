@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background: #eeeeee;
 
   .scene {
     position: absolute;
@@ -21,5 +22,15 @@
     width: 200px;
     height: 220px;
     z-index: 10;
+  }
+
+  .line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 1.5px;
+    width: 0;
+    background: black;
+    z-index: 101;
   }
 }

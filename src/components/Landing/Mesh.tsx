@@ -18,16 +18,17 @@ export default function Mesh() {
 
     const uniforms = useMemo(() => ({
         uTexture: { value: texture },
-        uProgress: { value: 0 },
-    }), [texture]);
+        uBend: { value: 0.0 },
+        uPivot: { value: h * 0.15 },
+    }), [texture, h]);
 
 
     useGSAP(() => {
-        gsap.to(uniforms.uProgress, {
+        gsap.to(uniforms.uBend, {
             delay: 1,
-            value: 1,
+            value: Math.PI,   // 0 → PI = full fold
             duration: 2.5,
-            ease: "expo.in"
+            ease: "expo.in",
         });
 
         if (!meshRef.current) return;
@@ -36,7 +37,7 @@ export default function Mesh() {
             delay: 2,
             x: 2.5,
             y: 2.5,
-            duration: 1.3,
+            duration: 1.2,
             ease: "expo.in"
         });
     }, {
